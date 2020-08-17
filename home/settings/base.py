@@ -93,3 +93,6 @@ REST_AUTH_SERIALIZERS = {
 REST_AUTH_REGISTER_SERIALIZERS = {
     'REGISTER_SERIALIZER': 'users.serializers.CustomRegisterSerializer',
 }
+FIREBASE_ORM_CERTIFICATE = os.path.join(BASE_DIR, 'openche-8e1ca-firebase-adminsdk-qcfmt-a09c2b4a88.json')
+
+FIREBASE_ORM_BUCKET_NAME = 'openche-8e1ca.appspot.com'

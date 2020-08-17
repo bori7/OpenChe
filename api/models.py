@@ -1,4 +1,5 @@
 from django.db import models
+#from firebase_orm import models
 from users.models import User
 
 
