@@ -42,7 +42,7 @@ class AssignmentCreate extends React.Component {
         const asnt = {
           teacher: this.props.username,
           title: values.title,
-          questions
+          questions:questions
         };
         this.props.createASNT(this.props.token, asnt);
       }

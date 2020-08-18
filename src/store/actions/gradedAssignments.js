@@ -33,6 +33,7 @@ export const getGradedASNTS = (username, token) => {
       .then(res => {
         const assignments = res.data;
         dispatch(getGradedASNTListSuccess(assignments));
+        console.log(assignments)
       })
       .catch(err => {
         dispatch(getGradedASNTListFail(err));
@@ -50,7 +51,7 @@ export const createGradedASNT = (token, asnt) => {
     axios
       .post(`http://127.0.0.1:8000/graded-assignments/create/`, asnt)
       .then(res => {
-        console.log("success");
+        console.log("success",asnt);
         //   dispatch(createASNTSuccess());
       })
       .catch(err => {

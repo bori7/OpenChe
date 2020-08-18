@@ -17,15 +17,19 @@ class RegistrationForm extends React.Component {
     this.props.form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         let is_student = false;
-        if (values.userType === "student") is_student = true;
+        let is_teacher = false;
+        values.userType === "student" &&  (is_student = true );
+        values.userType === "teacher" &&  (is_teacher = true );
         this.props.onAuth(
           values.userName,
           values.email,
           values.password,
           values.confirm,
-          is_student
+          is_student,
+          is_teacher
+          
         );
-        // this.props.history.push("/");
+        this.props.history.push("/");
       }
     });
   };
@@ -174,9 +178,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (username, email, password1, password2, is_student) =>
+    onAuth: (username, email, password1, password2, is_student,is_teacher) =>
       dispatch(
-        actions.authSignup(username, email, password1, password2, is_student)
+        actions.authSignup(username, email, password1, password2, is_student,is_teacher)
       )
   };
 };

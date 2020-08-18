@@ -16,6 +16,7 @@ class GradedAssignment(models.Model):
     assignment = models.ForeignKey(
         Assignment, on_delete=models.SET_NULL, blank=True, null=True)
     grade = models.FloatField()
+   
 
     def __str__(self):
         return self.student.username

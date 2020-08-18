@@ -28,15 +28,18 @@ export const getASNTS = token => {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
+    
     axios
       .get("http://127.0.0.1:8000/assignments/")
       .then(res => {
         const assignments = res.data;
+        console.log(token,assignments);
         dispatch(getASNTListSuccess(assignments));
       })
       .catch(err => {
         dispatch(getASNTListFail());
       });
+      
   };
 };
 
@@ -72,9 +75,11 @@ export const getASNTSDetail = (token, id) => {
       .then(res => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
+        console.log(token,assignment);
+
       })
       .catch(err => {
-        dispatch(getASNTDetailFail());
+        dispatch(getASNTDetailFail(err));
       });
   };
 };
@@ -88,7 +93,7 @@ const createASNTStart = () => {
 const createASNTSuccess = assignment => {
   return {
     type: actionTypes.CREATE_ASSIGNMENT_SUCCESS,
-    assignment
+    assignment:assignment
   };
 };
 
@@ -110,9 +115,11 @@ export const createASNT = (token, asnt) => {
       .post(`http://127.0.0.1:8000/assignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());
+        console.log(token,asnt);
+
       })
       .catch(err => {
-        dispatch(createASNTFail());
+        dispatch(createASNTFail(err));
       });
   };
 };

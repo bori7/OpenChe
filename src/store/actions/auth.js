@@ -10,7 +10,7 @@ export const authStart = () => {
 export const authSuccess = user => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    user
+    user:user
   };
 };
 
@@ -47,7 +47,7 @@ export const authLogin = (username, password) => {
       .then(res => {
         const user = {
           token: res.data.key,
-          username,
+          username:username,
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
@@ -68,7 +68,8 @@ export const authSignup = (
   email,
   password1,
   password2,
-  is_student
+  is_student,
+  is_teacher
 ) => {
   return dispatch => {
     dispatch(authStart());
@@ -77,18 +78,18 @@ export const authSignup = (
       email,
       password1,
       password2,
-      is_student,
-      is_teacher: !is_student
+      is_student:is_student,
+      is_teacher: is_teacher
     };
     axios
       .post("http://127.0.0.1:8000/rest-auth/registration/", user)
       .then(res => {
         const user = {
           token: res.data.key,
-          username,
+          username:username,
           userId: res.data.user,
           is_student,
-          is_teacher: !is_student,
+          is_teacher,
           expirationDate: new Date(new Date().getTime() + 3600 * 1000)
         };
         localStorage.setItem("user", JSON.stringify(user));
