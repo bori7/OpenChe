@@ -1,5 +1,5 @@
-import React from "react";
-import { connect } from "react-redux";
+import React,  { useContext, useState } from "react";
+import {MyContext} from '../store/context/myContext';
 import { Form, Input, Icon, Button, Divider } from "antd";
 import QuestionForm from "./QuestionForm";
 import Hoc from "../hoc/hoc";
@@ -7,28 +7,25 @@ import { createASNT } from "../store/actions/assignments";
 
 const FormItem = Form.Item;
 
-class AssignmentCreate extends React.Component {
-  state = {
-    formCount: 1
+const AssignmentCreate = (props) => {
+
+  const [formCount , setFormCount] = useState(1)
+  const {state, dispatch} = useContext(MyContext)
+
+  const {token, username} = state
+ 
+
+  const remove = () => {
+    setFormCount(formCount - 1)
   };
 
-  remove = () => {
-    const { formCount } = this.state;
-    this.setState({
-      formCount: formCount - 1
-    });
+ const add = () => {
+    setFormCount(formCount + 1)
   };
 
-  add = () => {
-    const { formCount } = this.state;
-    this.setState({
-      formCount: formCount + 1
-    });
-  };
-
-  handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    props.form.validateFields((err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
         const questions = [];
@@ -40,19 +37,19 @@ class AssignmentCreate extends React.Component {
           });
         }
         const asnt = {
-          teacher: this.props.username,
+          teacher: username,
           title: values.title,
           questions:questions
         };
-        this.props.createASNT(this.props.token, asnt);
+        dispatch(createASNT(token, asnt));
       }
     });
   };
 
-  render() {
-    const { getFieldDecorator } = this.props.form;
+
+    const { getFieldDecorator } = props.form;
     const questions = [];
-    for (let i = 0; i < this.state.formCount; i += 1) {
+    for (let i = 0; i < formCount; i += 1) {
       questions.push(
         <Hoc key={i}>
           {questions.length > 0 ? (
@@ -60,16 +57,16 @@ class AssignmentCreate extends React.Component {
               className="dynamic-delete-button"
               type="minus-circle-o"
               disabled={questions.length === 0}
-              onClick={() => this.remove()}
+              onClick={remove}
             />
           ) : null}
-          <QuestionForm id={i} {...this.props} />
+          <QuestionForm id={i} {...props} />
           <Divider />
         </Hoc>
       );
     }
     return (
-      <Form onSubmit={this.handleSubmit}>
+      <Form onSubmit={handleSubmit}>
         <h1>Create an assignment</h1>
         <FormItem label={"Title: "}>
           {getFieldDecorator(`title`, {
@@ -84,7 +81,7 @@ class AssignmentCreate extends React.Component {
         </FormItem>
         {questions}
         <FormItem>
-          <Button type="secondary" onClick={this.add}>
+          <Button type="secondary" onClick={add}>
             <Icon type="plus" /> Add question
           </Button>
         </FormItem>
@@ -95,26 +92,9 @@ class AssignmentCreate extends React.Component {
         </FormItem>
       </Form>
     );
-  }
-}
+  };
 
 const WrappedAssignmentCreate = Form.create()(AssignmentCreate);
 
-const mapStateToProps = state => {
-  return {
-    token: state.auth.token,
-    username: state.auth.username,
-    loading: state.assignments.loading
-  };
-};
 
-const mapDispatchToProps = dispatch => {
-  return {
-    createASNT: (token, asnt) => dispatch(createASNT(token, asnt))
-  };
-};
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(WrappedAssignmentCreate);
+export default WrappedAssignmentCreate;

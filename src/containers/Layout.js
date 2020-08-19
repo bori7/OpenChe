@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useContext} from "react";
+import {MyContext} from '../store/context/myContext';
 import { Layout, Menu, Breadcrumb } from "antd";
 import { Link, withRouter } from "react-router-dom";
-import { connect } from "react-redux";
 import * as actions from "../store/actions/auth";
 
 const { Header, Content, Footer } = Layout;
 
-class CustomLayout extends React.Component {
-  render() {
+const CustomLayout = (props) => {
+  
+  const {state, dispatch} = useContext(MyContext);
+  const isAuthenticated = state.token !== null
+  
     return (
       <Layout className="layout">
         <Header>
@@ -18,8 +21,8 @@ class CustomLayout extends React.Component {
             defaultSelectedKeys={["2"]}
             style={{ lineHeight: "64px" }}
           >
-            {this.props.isAuthenticated ? (
-              <Menu.Item key="2" onClick={this.props.logout}>
+            { isAuthenticated ? (
+              <Menu.Item key="2" onClick={dispatch(actions.logout())}>
                 Logout
               </Menu.Item>
             ) : (
@@ -34,19 +37,19 @@ class CustomLayout extends React.Component {
             <Breadcrumb.Item>
               <Link to="/">Home</Link>
             </Breadcrumb.Item>
-            {this.props.token !== null ? (
+            {state.token !== null ? (
               <Breadcrumb.Item>
-                <Link to={`/profile/${this.props.userId}`}>Profile</Link>
+                <Link to={`/profile/${state.userId}`}>Profile</Link>
               </Breadcrumb.Item>
             ) : null}
-            {this.props.token !== null && this.props.is_teacher ? (
+            {state.token !== null && state.is_teacher ? (
               <Breadcrumb.Item>
                 <Link to="/create">Create</Link>
               </Breadcrumb.Item>
             ) : null}
           </Breadcrumb>
           <div style={{ background: "#fff", padding: 24, minHeight: 280 }}>
-            {this.props.children}
+            {props.children}
           </div>
         </Content>
         <Footer style={{ textAlign: "center" }}>
@@ -54,26 +57,7 @@ class CustomLayout extends React.Component {
         </Footer>
       </Layout>
     );
-  }
-}
 
-const mapStateToProps = state => {
-  return {
-    userId: state.auth.userId,
-    token: state.auth.token,
-    is_teacher: state.auth.is_teacher
-  };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    logout: () => dispatch(actions.logout())
-  };
-};
-
-export default withRouter(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(CustomLayout)
-);
+export default withRouter(CustomLayout);

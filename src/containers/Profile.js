@@ -1,62 +1,50 @@
-import React from "react";
+import React,  { useContext, useEffect } from "react";
 import { List, Skeleton } from "antd";
-import { connect } from "react-redux";
 import Result from "../components/Result";
 import { getGradedASNTS } from "../store/actions/gradedAssignments";
 import Hoc from "../hoc/hoc";
+import {MyContext} from '../store/context/myContext';
 
-class Profile extends React.PureComponent {
-  componentDidMount() {
-    if (this.props.token !== undefined && this.props.token !== null) {
-      this.props.getGradedASNTS(this.props.username, this.props.token);
-    }
-  }
 
-  componentWillReceiveProps(newProps) {
-    if (newProps.token !== this.props.token) {
-      if (newProps.token !== undefined && newProps.token !== null) {
-        this.props.getGradedASNTS(newProps.username, newProps.token);
-      }
-    }
-  }
 
-  render() {
+const  Profile = () => {
+
+  const {state, dispatch} = useContext(MyContext);
+  const {token,username,assignments, loading} = state;
+
+  useEffect(() => {
+   if (token !== undefined && token !== null) {
+     dispatch(getGradedASNTS(username, token));
+   }
+    }, [token])
+
+
     return (
       <Hoc>
-        {this.props.loading ? (
+        {loading ? (
           <Skeleton active />
         ) : (
           <Hoc>
-            <h1>Hi {this.props.username}</h1>
+            <h1>Hi {username}</h1>
             <List
               size="large"
-              dataSource={this.props.gradedAssignments}
+              dataSource={assignments}
               renderItem={a => <Result key={a.id} grade={a.grade} />}
             />
           </Hoc>
         )}
+        
       </Hoc>
     );
-  }
 }
 
-const mapStateToProps = state => {
-  return {
-    token: state.auth.token,
-    username: state.auth.username,
-    gradedAssignments: state.gradedAssignments.assignments,
-    loading: state.gradedAssignments.loading
-  };
-};
+// const mapStateToProps = state => {
+//   return {
+//     token: state.auth.token,
+//     username: state.auth.username,
+    
+//   };
+// };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getGradedASNTS: (username, token) =>
-      dispatch(getGradedASNTS(username, token))
-  };
-};
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Profile);
+export default Profile;

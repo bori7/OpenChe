@@ -1,26 +1,26 @@
-import React from "react";
+import React, { useState} from "react";
 import { Steps, Button } from "antd";
 
 const Step = Steps.Step;
 
-class Questions extends React.Component {
-  state = {
-    current: 0
-  };
+const Questions = (props) => {
 
-  next() {
-    const current = this.state.current + 1;
-    this.setState({ current });
+const [current, setCurrent] = useState(0)
+
+  
+  const next = () => {
+     const curr = current + 1;
+    setCurrent( curr);
   }
 
-  prev() {
-    const current = this.state.current - 1;
-    this.setState({ current });
+  const prev = () => {
+    const curr = current - 1;
+    setCurrent( curr);
   }
 
-  render() {
-    const { current } = this.state;
-    const { questions } = this.props;
+  
+  const { questions } = props;
+
     return (
       <div>
         <Steps progressDot current={current}>
@@ -31,17 +31,17 @@ class Questions extends React.Component {
         <div>{questions[current]}</div>
         <div>
           {current < questions.length - 1 && (
-            <Button type="primary" onClick={() => this.next()}>
+            <Button type="primary" onClick={next}>
               Next
             </Button>
           )}
           {current === questions.length - 1 && (
-            <Button type="primary" onClick={() => this.props.submit()}>
+            <Button type="primary" onClick={props.submit()}>
               Submit
             </Button>
           )}
           {current > 0 && (
-            <Button style={{ marginLeft: 8 }} onClick={() => this.prev()}>
+            <Button style={{ marginLeft: 8 }} onClick={prev}>
               Previous
             </Button>
           )}
@@ -49,6 +49,5 @@ class Questions extends React.Component {
       </div>
     );
   }
-}
 
 export default Questions;

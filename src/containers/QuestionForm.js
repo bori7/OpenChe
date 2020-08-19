@@ -6,9 +6,10 @@ const FormItem = Form.Item;
 
 let id = 0;
 
-class QuestionForm extends React.Component {
-  remove = k => {
-    const { form } = this.props;
+const QuestionForm = (props) => {
+
+  const remove = k => {
+    const { form } = props;
     const keys = form.getFieldValue("keys");
     if (keys.length === 1) return;
     form.setFieldsValue({
@@ -16,8 +17,8 @@ class QuestionForm extends React.Component {
     });
   };
 
-  add = () => {
-    const { form } = this.props;
+  const add = () => {
+    const { form } = props;
     const keys = form.getFieldValue("keys");
     const nextKeys = keys.concat(++id);
     form.setFieldsValue({
@@ -25,13 +26,13 @@ class QuestionForm extends React.Component {
     });
   };
 
-  render() {
-    const { getFieldDecorator, getFieldValue } = this.props.form;
+
+    const { getFieldDecorator, getFieldValue } = props.form;
     getFieldDecorator("keys", { initialValue: [] });
     const keys = getFieldValue("keys");
     const formItems = keys.map((k, index) => (
       <FormItem label={index === 0 ? "Choices" : ""} key={k}>
-        {getFieldDecorator(`questions[${this.props.id}]choices[${k}]`, {
+        {getFieldDecorator(`questions[${props.id}]choices[${k}]`, {
           validateTrigger: ["onChange", "onBlur"],
           rules: [
             {
@@ -46,7 +47,7 @@ class QuestionForm extends React.Component {
             className="dynamic-delete-button"
             type="minus-circle-o"
             disabled={keys.length === 1}
-            onClick={() => this.remove(k)}
+            onClick={() => remove(k)}
           />
         ) : null}
       </FormItem>
@@ -54,7 +55,7 @@ class QuestionForm extends React.Component {
     return (
       <Hoc>
         <FormItem label="Question: ">
-          {getFieldDecorator(`question[${this.props.id}]`, {
+          {getFieldDecorator(`question[${props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
@@ -65,7 +66,7 @@ class QuestionForm extends React.Component {
           })(<Input placeholder="Add a question" />)}
         </FormItem>
         <FormItem label="Answer: ">
-          {getFieldDecorator(`answers[${this.props.id}]`, {
+          {getFieldDecorator(`answers[${props.id}]`, {
             validateTrigger: ["onChange", "onBlur"],
             rules: [
               {
@@ -77,13 +78,12 @@ class QuestionForm extends React.Component {
         </FormItem>
         {formItems}
         <FormItem>
-          <Button type="dashed" onClick={this.add} style={{ width: "60%" }}>
+          <Button type="dashed" onClick={add} style={{ width: "60%" }}>
             <Icon type="plus" /> Add an answer choice
           </Button>
         </FormItem>
       </Hoc>
     );
-  }
-}
+};
 
 export default QuestionForm;

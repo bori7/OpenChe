@@ -7,3 +7,9 @@ it("renders without crashing", () => {
   ReactDOM.render(<App />, div);
   ReactDOM.unmountComponentAtNode(div);
 });
+
+describe('App', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+    cleanup();
+  });
