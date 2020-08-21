@@ -20,8 +20,8 @@ const AssignmentDetail = (props) => {
 
 
   useEffect(() => {
-    if (this.props.token !== undefined && this.props.token !== null) {
-       dispatch(getASNTSDetail(token, props.match.params.id));
+    if (token !== undefined && token !== null) {
+       getASNTSDetail(token, props.match.params.id,dispatch);
     }
   }, [token])
 
@@ -38,7 +38,7 @@ const AssignmentDetail = (props) => {
       asntId: currentAssignment.id,
       answers: usersAnswers
     };
-    dispatch(createGradedASNT(token, asnt))
+    createGradedASNT(token, asnt,dispatch)
   
   }
 

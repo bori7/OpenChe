@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
-import React, { useReducer, createContext } from "react";
+import React, { useState, useReducer, createContext } from "react";
 
 
 export const MyContext = createContext();
@@ -110,6 +110,7 @@ const createASNTFail = (state, action) => {
 
 
 const authStart = (state, action) => {
+  console.log('started')
   return updateObject(state, {
     error: null,
     loading: true
@@ -184,9 +185,31 @@ const reducer = (state, action) => {
 };
 
 
+const useAsyncReducer = (reducer, initialState) => {
+  const [state, setState] = useState(initialState);
+
+  const dispatch = async action => {
+    const result = reducer(state, action);
+    if (typeof result.then === "function") {
+      try {
+        const newState = await result;
+        setState(newState);
+      } catch (err) {
+        setState({ ...state, error: err });
+      }
+    } else {
+      setState(result);
+    }
+  };
+
+  return [state, dispatch];
+};
+
+//export default useAsyncReducer;
+
 export const MyContextProvider = props => {
    const [state, dispatch] = useReducer(reducer, initialState);
-
+   //const [state, dispatch] = useAsyncReducer(reducer, initialState);
   return (
     <MyContext.Provider value={{state, dispatch}}>
       {props.children}

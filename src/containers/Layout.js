@@ -11,6 +11,9 @@ const CustomLayout = (props) => {
   const {state, dispatch} = useContext(MyContext);
   const isAuthenticated = state.token !== null
   
+  const logout = () => {
+    actions.logout(dispatch)
+  }
     return (
       <Layout className="layout">
         <Header>
@@ -22,7 +25,7 @@ const CustomLayout = (props) => {
             style={{ lineHeight: "64px" }}
           >
             { isAuthenticated ? (
-              <Menu.Item key="2" onClick={dispatch(actions.logout())}>
+              <Menu.Item key="2" onClick={logout} >
                 Logout
               </Menu.Item>
             ) : (
@@ -37,12 +40,12 @@ const CustomLayout = (props) => {
             <Breadcrumb.Item>
               <Link to="/">Home</Link>
             </Breadcrumb.Item>
-            {state.token !== null ? (
+            {isAuthenticated ? (
               <Breadcrumb.Item>
                 <Link to={`/profile/${state.userId}`}>Profile</Link>
               </Breadcrumb.Item>
             ) : null}
-            {state.token !== null && state.is_teacher ? (
+            {isAuthenticated && state.is_teacher ? (
               <Breadcrumb.Item>
                 <Link to="/create">Create</Link>
               </Breadcrumb.Item>

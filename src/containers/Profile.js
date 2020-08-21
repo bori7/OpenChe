@@ -14,7 +14,7 @@ const  Profile = () => {
 
   useEffect(() => {
    if (token !== undefined && token !== null) {
-     dispatch(getGradedASNTS(username, token));
+     getGradedASNTS(username, token,dispatch);
    }
     }, [token])
 

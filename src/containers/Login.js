@@ -15,7 +15,8 @@ const NormalLoginForm = (props) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        dispatch(actions.authLogin(values.userName, values.password))
+        actions.authLogin(values.userName, values.password,dispatch)
+        //console.log(values.userName, values.password)
         props.history.push("/");
       }
     });

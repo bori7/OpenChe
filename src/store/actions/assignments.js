@@ -21,15 +21,15 @@ const getASNTListFail = error => {
   };
 };
 
-export const getASNTS = token => {
-  return dispatch => {
+export const getASNTS = (token,dispatch) => {
+  
     dispatch(getASNTListStart());
-    axios.defaults.headers = {
+     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
     
-    axios
+     axios
       .get("http://127.0.0.1:8000/assignments/")
       .then(res => {
         const assignments = res.data;
@@ -40,7 +40,7 @@ export const getASNTS = token => {
         dispatch(getASNTListFail());
       });
       
-  };
+  
 };
 
 const getASNTDetailStart = () => {
@@ -63,25 +63,23 @@ const getASNTDetailFail = error => {
   };
 };
 
-export const getASNTSDetail = (token, id) => {
-  return dispatch => {
+export const getASNTSDetail = (token, id, dispatch) => {
+  
     dispatch(getASNTDetailStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
-    axios
+     axios
       .get(`http://127.0.0.1:8000/assignments/${id}/`)
       .then(res => {
         const assignment = res.data;
         dispatch(getASNTDetailSuccess(assignment));
         console.log(token,assignment);
-
       })
       .catch(err => {
         dispatch(getASNTDetailFail(err));
       });
-  };
 };
 
 const createASNTStart = () => {
@@ -90,10 +88,10 @@ const createASNTStart = () => {
   };
 };
 
-const createASNTSuccess = assignment => {
+const createASNTSuccess=() => {
   return {
     type: actionTypes.CREATE_ASSIGNMENT_SUCCESS,
-    assignment:assignment
+    
   };
 };
 
@@ -104,14 +102,14 @@ const createASNTFail = error => {
   };
 };
 
-export const createASNT = (token, asnt) => {
-  return dispatch => {
+export const createASNT = (token, asnt,dispatch) => {
+ 
     dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
-    axios
+  axios
       .post(`http://127.0.0.1:8000/assignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());
@@ -121,5 +119,5 @@ export const createASNT = (token, asnt) => {
       .catch(err => {
         dispatch(createASNTFail(err));
       });
-  };
+  
 };

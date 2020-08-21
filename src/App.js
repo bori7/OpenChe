@@ -6,19 +6,17 @@ import * as actions from "./store/actions/auth";
 import CustomLayout from "./containers/Layout";
 import {MyContext} from './store/context/myContext';
 
-const App = (props) => {
+const App = () => {
   
   const {dispatch} = useContext(MyContext)
 
-  
-  
   useEffect(() => {
-    dispatch(actions.authCheckState())
+    actions.authCheckState(dispatch)
   }, [])
   
     return (
         <Router>
-         <CustomLayout { ...props}>
+         <CustomLayout >
           <BaseRouter />
          </CustomLayout>
         </Router>

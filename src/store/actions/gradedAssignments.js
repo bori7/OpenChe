@@ -21,8 +21,8 @@ const getGradedASNTListFail = error => {
   };
 };
 
-export const getGradedASNTS = (username, token) => {
-  return dispatch => {
+export const getGradedASNTS = (username, token,dispatch) => {
+ 
     dispatch(getGradedASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
@@ -39,16 +39,16 @@ export const getGradedASNTS = (username, token) => {
         dispatch(getGradedASNTListFail(err));
       });
   };
-};
 
-export const createGradedASNT = (token, asnt) => {
-  return dispatch => {
+
+export const createGradedASNT = (token, asnt, dispatch) => {
+  
     //   dispatch(createASNTStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
     };
-    axios
+   axios
       .post(`http://127.0.0.1:8000/graded-assignments/create/`, asnt)
       .then(res => {
         console.log("success",asnt);
@@ -57,5 +57,4 @@ export const createGradedASNT = (token, asnt) => {
       .catch(err => {
         //   dispatch(createASNTFail());
       });
-  };
 };
