@@ -1,6 +1,6 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
-import React, { useState, useReducer, createContext } from "react";
+import React, { useReducer, createContext } from "react";
 
 
 export const MyContext = createContext();
@@ -137,9 +137,7 @@ const authFail = (state, action) => {
 };
 
 const authLogout = (state, action) => {
-  return updateObject(state, {
-    token: null
-  });
+  return updateObject(state, initialState);
 };
 
 
@@ -185,27 +183,27 @@ const reducer = (state, action) => {
 };
 
 
-const useAsyncReducer = (reducer, initialState) => {
-  const [state, setState] = useState(initialState);
+// const useAsyncReducer = (reducer, initialState) => {
+//   const [state, setState] = useState(initialState);
 
-  const dispatch = async action => {
-    const result = reducer(state, action);
-    if (typeof result.then === "function") {
-      try {
-        const newState = await result;
-        setState(newState);
-      } catch (err) {
-        setState({ ...state, error: err });
-      }
-    } else {
-      setState(result);
-    }
-  };
+//   const dispatch = async action => {
+//     const result = reducer(state, action);
+//     if (typeof result.then === "function") {
+//       try {
+//         const newState = await result;
+//         setState(newState);
+//       } catch (err) {
+//         setState({ ...state, error: err });
+//       }
+//     } else {
+//       setState(result);
+//     }
+//   };
 
-  return [state, dispatch];
-};
+//   return [state, dispatch];
+// };
 
-//export default useAsyncReducer;
+// //export default useAsyncReducer;
 
 export const MyContextProvider = props => {
    const [state, dispatch] = useReducer(reducer, initialState);

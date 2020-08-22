@@ -36,7 +36,7 @@ const [current, setCurrent] = useState(0)
             </Button>
           )}
           {current === questions.length - 1 && (
-            <Button type="primary" onClick={props.submit()}>
+            <Button type="primary" onClick={props.submit}>
               Submit
             </Button>
           )}

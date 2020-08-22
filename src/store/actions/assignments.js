@@ -105,6 +105,7 @@ const createASNTFail = error => {
 export const createASNT = (token, asnt,dispatch) => {
  
     dispatch(createASNTStart());
+    console.log(token,asnt)
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
@@ -113,7 +114,7 @@ export const createASNT = (token, asnt,dispatch) => {
       .post(`http://127.0.0.1:8000/assignments/`, asnt)
       .then(res => {
         dispatch(createASNTSuccess());
-        console.log(token,asnt);
+        ;
 
       })
       .catch(err => {

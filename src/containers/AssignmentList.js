@@ -9,13 +9,13 @@ const AssignmentList = () => {
 
     const {state, dispatch} = useContext(MyContext)
     const {token, loading, assignments} = state
-    console.log(token)
+    
     useEffect(() => {
       if (token !== undefined && token !== null) {
         actions.getASNTS(token,dispatch);
       }
       }, [token]) 
-      console.log(token)
+      
     return (
       <Hoc>
         {loading ? (

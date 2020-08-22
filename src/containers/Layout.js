@@ -13,6 +13,7 @@ const CustomLayout = (props) => {
   
   const logout = () => {
     actions.logout(dispatch)
+    props.history.push("/");
   }
     return (
       <Layout className="layout">

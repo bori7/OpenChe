@@ -8,11 +8,11 @@ import {MyContext} from './store/context/myContext';
 
 const App = () => {
   
-  const {dispatch} = useContext(MyContext)
+  const {state,dispatch} = useContext(MyContext)
 
   useEffect(() => {
     actions.authCheckState(dispatch)
-  }, [])
+  }, [state.token])
   
     return (
         <Router>

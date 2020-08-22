@@ -44,6 +44,10 @@ class AssignmentSerializer(serializers.ModelSerializer):
             newQ.question = q['title']
             newQ.order = order
             newQ.save()
+            ans = Choice()
+            ans.title = q['answer']
+            ans.save()
+            newQ.choices.add(ans)
 
             for c in q['choices']:
                 newC = Choice()
@@ -51,7 +55,8 @@ class AssignmentSerializer(serializers.ModelSerializer):
                 newC.save()
                 newQ.choices.add(newC)
 
-            newQ.answer = Choice.objects.get(title=q['answer'][0])
+            
+            newQ.answer = Choice.objects.get(title=q['answer'])
             newQ.assignment = assignment
             newQ.save()
             order += 1

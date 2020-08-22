@@ -27,7 +27,6 @@ const AssignmentCreate = (props) => {
     e.preventDefault();
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log("Received values of form: ", values);
         const questions = [];
         for (let i = 0; i < values.questions.length; i += 1) {
           questions.push({
@@ -41,7 +40,7 @@ const AssignmentCreate = (props) => {
           title: values.title,
           questions:questions
         };
-        dispatch(createASNT(token, asnt));
+        createASNT(token, asnt,dispatch);
       }
     });
   };
