@@ -40,7 +40,6 @@ const AssignmentDetail = (props) => {
       answers: usersAnswers
     };
     createGradedASNT(token, asnt,dispatch)
-  
   }
 
   
