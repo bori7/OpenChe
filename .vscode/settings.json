@@ -9,5 +9,6 @@
     "python.linting.pycodestyleArgs": ["--ignore=E501"],
     "files.exclude": {
       "**/*.pyc": true
-    }
+    },
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe"
   }
