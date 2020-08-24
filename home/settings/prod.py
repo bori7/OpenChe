@@ -9,8 +9,8 @@ ALLOWED_HOSTS += ['0.0.0.0','localhost','cheart2020.herokuapp.com','127.0.0.1', 
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
 #SECRET_KEY = os.environ.get('SECRET_KEY')
-EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+# EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
 
 DATABASES = {
