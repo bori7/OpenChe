@@ -1,2 +1,2 @@
-release: python manage.py migrate sites
+release: python manage.py collectstatic
 web: gunicorn home.wsgi.prod --log-file -
