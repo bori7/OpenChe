@@ -3,7 +3,7 @@
 from .base import *
 
 DEBUG = True
-ALLOWED_HOSTS += ['0.0.0.0','localhost','cheart2020.herokuapp.com','127.0.0.1', 'localhost'] 
+ALLOWED_HOSTS += ['0.0.0.0','localhost','openche2020.herokuapp.com','127.0.0.1', 'localhost'] 
 
 
 WSGI_APPLICATION = 'home.wsgi.prod.application'
