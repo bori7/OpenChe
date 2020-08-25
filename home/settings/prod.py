@@ -17,24 +17,16 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'chemical',
-        'USER': 'postgres',
-        'PASSWORD': 'asdfghjklpoiuytrewq',
-        'HOST': 'localhost',
-        'PORT': '',
+        'NAME': 'd9varpu2c7df3s',
+        'USER': 'ufvdkzsenjmwzq',
+        'PASSWORD': '92b1bcacd94a5cbf9c036a210173cf2ecb8bd6223d4b1a6e96f5bebb1c6d9fa6',
+        'HOST': 'ec2-52-22-94-132.compute-1.amazonaws.com',
+        'PORT': '5432',
     }
 }
 
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
-# 'HOST': 'ec2-34-236-215-156.compute-1.amazonaws.com',
-        
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -47,10 +39,6 @@ AUTH_PASSWORD_VALIDATORS = [
 # STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# CORS_ORIGIN_WHITELIST = (
-#     'http://localhost:3000',
-#     'http://127.0.0.1:8000',
-#     'http://192.168.8.100:3000',
-#)
+
 
 CORS_ORIGIN_ALLOW_ALL = True 
