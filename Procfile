@@ -1,2 +1,2 @@
-release: python manage.py migrate users
+release: python manage.py migrate api
 web: gunicorn home.wsgi.prod --log-file -
