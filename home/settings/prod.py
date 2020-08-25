@@ -6,7 +6,8 @@ DEBUG = True
 ALLOWED_HOSTS += ['0.0.0.0','localhost','openche.herokuapp.com','127.0.0.1', 'localhost'] 
 
 
-WSGI_APPLICATION = 'home.wsgi.prod.application'
+# WSGI_APPLICATION = 'home.wsgi.prod.application'
+
 
 #SECRET_KEY = os.environ.get('SECRET_KEY')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
