@@ -1,9 +1,0 @@
-env
-**/*.pyc
-**/__pycache__
-**/migrations
-db.sqlite3
-node_modules
-package-lock.json
-.vscode.env
-.env
