@@ -3,15 +3,13 @@
 from .base import *
 
 
-
-
 DEBUG = True
-ALLOWED_HOSTS += ['openche2020.herokuapp.com','127.0.0.1'] 
+ALLOWED_HOSTS += ['openche2020.herokuapp.com'] 
 
 
 WSGI_APPLICATION = 'home.wsgi.prod.application'
 
-
+django_heroku.settings(locals())
 SECRET_KEY = os.environ.get('SECRET_KEY','-05sgp9!deq=q1nltm@^^2cc+v29i(tyybv3v2t77qi66czazj')
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
@@ -49,10 +47,10 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 CORS_ORIGIN_ALLOW_ALL = True 
 
-# This should already be in your settings.py
-django_heroku.settings(locals())
-# This is new
-options = DATABASES['default'].get('OPTIONS', {})
-options.pop('sslmode', None)
+# # This should already be in your settings.py
+
+# # This is new
+# options = DATABASES['default'].get('OPTIONS', {})
+# options.pop('sslmode', None)
 
 
