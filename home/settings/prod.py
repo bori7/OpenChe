@@ -44,6 +44,8 @@ AUTH_PASSWORD_VALIDATORS = [
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
+CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ORIGIN_ALLOW_ALL = True 
 
