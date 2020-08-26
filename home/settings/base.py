@@ -134,3 +134,5 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+CORS_ALLOW_CREDENTIALS = True
