@@ -2,6 +2,9 @@
 
 from .base import *
 
+
+
+
 DEBUG = True
 ALLOWED_HOSTS += ['0.0.0.0','localhost','openche2020.herokuapp.com','127.0.0.1', 'localhost'] 
 
@@ -26,7 +29,10 @@ DATABASES = {
 }
 
 db_from_env = dj_database_url.config(conn_max_age=600)
+
 DATABASES['default'].update(db_from_env)
+
+
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -42,3 +48,11 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 CORS_ORIGIN_ALLOW_ALL = True 
+
+# This should already be in your settings.py
+django_heroku.settings(locals())
+# This is new
+options = DATABASES['default'].get('OPTIONS', {})
+options.pop('sslmode', None)
+
+
