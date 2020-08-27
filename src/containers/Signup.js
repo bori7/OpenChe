@@ -95,13 +95,18 @@ const RegistrationForm = (props) => {
                 message: "Please input your password!"
               },
               {
+                pattern: /^(?=.*\d)(?=.*[a-z]).{8,}$/,
+                message: "Must contain at least one number and lowercase letter, and at least 8 characters"
+              },
+              {
                 validator: validateToNextPassword
-              }
+              },
+              
             ]
           })(
             <Input
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
-              type="password"
+              type="password" 
               placeholder="Password"
             />
           )}
@@ -152,9 +157,9 @@ const RegistrationForm = (props) => {
           >
             Signup
           </Button>
-          Or
+          Or {  ""}
           <NavLink style={{ marginRight: "10px" }} to="/login/">
-            login
+            Login
           </NavLink>
         </FormItem>
       </Form>

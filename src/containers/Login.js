@@ -22,17 +22,12 @@ const NormalLoginForm = (props) => {
     });
   };
 
-  
-    let errorMessage = null;
-    if (state.error) {
-      errorMessage = <p>{state.error.message}</p>;
-    }
 
     const { getFieldDecorator } = props.form;
 
     return (
       <div>
-        {errorMessage}
+        
         {state.loading ? (
           <Spin indicator={antIcon} />
         ) : (
@@ -79,7 +74,7 @@ const NormalLoginForm = (props) => {
               Or
               <NavLink style={{ marginRight: "10px" }} to="/signup/">
                 {" "}
-                signup
+                Signup
               </NavLink>
             </FormItem>
           </Form>
