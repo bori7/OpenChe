@@ -1,6 +1,6 @@
 import React, { useContext} from "react";
 import {MyContext} from '../store/context/myContext';
-import { Form, Icon, Input, Button, Spin } from "antd";
+import { Form, Icon, Input, Button, Spin, message } from "antd";
 import { NavLink } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 
@@ -17,17 +17,27 @@ const NormalLoginForm = (props) => {
       if (!err) {
         actions.authLogin(values.userName, values.password,dispatch)
         //console.log(values.userName, values.password)
-        props.history.push("/");
-      }
+        if (state.error != null){
+          props.history.push("/");
+        }
+       }
     });
+  
   };
-
+  var errorMessage = null;
+  React.useEffect(() => {
+   
+    if (state.error) { errorMessage = message.error(state.error)}
+    // console.log(state.error, errorMessage)
+  }, [state.error]);
 
     const { getFieldDecorator } = props.form;
 
+   
+   
     return (
       <div>
-        
+        {errorMessage}
         {state.loading ? (
           <Spin indicator={antIcon} />
         ) : (

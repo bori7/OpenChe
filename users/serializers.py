@@ -2,6 +2,7 @@ from allauth.account.adapter import get_adapter
 from rest_auth.registration.serializers import RegisterSerializer
 from rest_framework import serializers
 from rest_framework.authtoken.models import Token
+from django.contrib.auth import authenticate
 
 from .models import User
 
@@ -56,3 +57,5 @@ class TokenSerializer(serializers.ModelSerializer):
             'is_student': is_student,
             'is_teacher': is_teacher
         }
+
+  

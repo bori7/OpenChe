@@ -36,7 +36,7 @@ export const getGradedASNTS = (username, token,dispatch) => {
         console.log(assignments)
       })
       .catch(err => {
-        dispatch(getGradedASNTListFail(err));
+        dispatch(getGradedASNTListFail(err.response.data.message));
       });
   };
 

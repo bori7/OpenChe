@@ -37,7 +37,7 @@ export const getASNTS = (token,dispatch) => {
         dispatch(getASNTListSuccess(assignments));
       })
       .catch(err => {
-        dispatch(getASNTListFail());
+        dispatch(getASNTListFail(err.response.data.message));
       });
       
   
@@ -78,7 +78,7 @@ export const getASNTSDetail = (token, id, dispatch) => {
         console.log(token,assignment);
       })
       .catch(err => {
-        dispatch(getASNTDetailFail(err));
+        dispatch(getASNTDetailFail(err.response.data.message));
       });
 };
 
@@ -118,7 +118,7 @@ export const createASNT = (token, asnt,dispatch) => {
 
       })
       .catch(err => {
-        dispatch(createASNTFail(err));
+        dispatch(createASNTFail(err.response.data.message));
       });
   
 };

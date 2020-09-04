@@ -16,11 +16,11 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid(raise_exception=True):
             assignment = serializer.create(request)
             if assignment:
                 return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+        return Response({"message": "error creating assignment"},status=HTTP_400_BAD_REQUEST)
 
 
 class GradedAssignmentListView(ListAPIView):
@@ -39,10 +39,10 @@ class GradedAssignmentCreateView(CreateAPIView):
     queryset = GradedAssignment.objects.all()
 
     def post(self, request):
-        print(request.data)
+        # print(request.data)
         serializer = GradedAssignmentSerializer(data=request.data)
-        serializer.is_valid()
+        serializer.is_valid(raise_exception=True)
         graded_assignment = serializer.create(request)
         if graded_assignment:
             return Response(status=HTTP_201_CREATED)
-        return Response(status=HTTP_400_BAD_REQUEST)
+        return Response({"message": "error grading assignment"},status=HTTP_400_BAD_REQUEST)

@@ -1,6 +1,6 @@
 import React, { useContext} from "react";
 import {MyContext} from '../store/context/myContext';
-import { Layout, Menu, Breadcrumb, message } from "antd";
+import { Layout, Menu, Breadcrumb } from "antd";
 import { Link, withRouter } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 
@@ -16,13 +16,11 @@ const CustomLayout = (props) => {
     props.history.push("/");
   }
 
-  let errorMessage = null;
-    if (state.error) {
-      errorMessage = message.error(state.error.message);
-    }
+  
     return (
       <Layout className="layout">
-      {errorMessage}
+      
+
         <Header>
           <div className="logo" />
           <Menu

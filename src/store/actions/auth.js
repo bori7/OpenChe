@@ -53,14 +53,15 @@ export const authLogin = (username, password, dispatch) => {
           userId: res.data.user,
           is_student: res.data.user_type.is_student,
           is_teacher: res.data.user_type.is_teacher,
-          expirationDate: new Date(new Date().getTime() + 3600 * 1000)
+          expirationDate: new Date(new Date().getTime() + 3600 * 1000),
+          error:null
         };
         localStorage.setItem("user", JSON.stringify(user));
         dispatch(authSuccess(user));
         checkAuthTimeout(3600,dispatch);
       })
       .catch(err => {
-        dispatch(authFail(err));
+        dispatch(authFail(err.response.data.non_field_errors));
       });
   };
 
@@ -99,7 +100,7 @@ export const authSignup = (
         checkAuthTimeout(3600,dispatch);
       })
       .catch(err => {
-        dispatch(authFail(err));
+        dispatch(authFail(err.response.data.non_field_errors));
       });
   };
 
