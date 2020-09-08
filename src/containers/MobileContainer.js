@@ -8,7 +8,7 @@ import { createMedia } from '@artsy/fresnel';
 import PropTypes from 'prop-types';
 import {Button, Container, Icon,  Menu,
   Segment, Sidebar} from 'semantic-ui-react';
-import {HomepageHeading} from './HomePageContainer';
+import {HomepageHeading} from './Header';
 
   const {  Media } = createMedia({
     breakpoints: {
@@ -47,7 +47,40 @@ const MobileContainer = (props) =>  {
               vertical
               visible={sidebarOpened}
             >
-              <Menu.Item as='a' >
+            <Menu.Item as='a' >
+              <Link to="/">Home</Link>
+                </Menu.Item>
+              {isAuthenticated ? (
+              <Menu.Item>
+                <Link to={`/profile/${state.userId}`}>Profile</Link>
+              </Menu.Item>
+                ) : null}
+              {isAuthenticated && state.is_teacher ? (
+                <Menu.Item>
+                  <Link to="/create">Create</Link>
+                </Menu.Item>
+              ) : null}
+              {isAuthenticated ? (
+                <Menu.Item>
+                  <Link to="/assignment">Assignments</Link>
+                </Menu.Item>
+              ) : null}
+              <Menu.Item as='a'>Work</Menu.Item>
+              <Menu.Item as='a'>Company</Menu.Item>
+              <Menu.Item as='a'>Careers</Menu.Item>
+              {/* <Menu.Item position='right'>
+                { isAuthenticated ? (
+                  <Button as='a' inverted style={{ marginLeft: '0.5em' }} onClick={logout}>
+                  Logout
+                  </Button>
+                  ) : (
+                    <Button as='a' inverted={!fixed}>
+                    <Link to="/login">Login</Link>
+                    </Button>
+                  )}
+              </Menu.Item> */}
+            
+              {/* <Menu.Item as='a' >
               <Link to="/">Home</Link>
               </Menu.Item>
               {isAuthenticated ? (
@@ -71,7 +104,7 @@ const MobileContainer = (props) =>  {
                 <Menu.Item key="2">
                   <Link to="/login">Login</Link>
                 </Menu.Item>
-              )}
+              )} */}
             </Sidebar>
   
             <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -81,11 +114,19 @@ const MobileContainer = (props) =>  {
                 style={{ minHeight: 350, padding: '1em 0em' }}
                 vertical
               >
-                <Container>
+                
                   <Menu inverted pointing secondary size='large'>
                     <Menu.Item onClick={handleToggle}>
                       <Icon name='sidebar' />
                     </Menu.Item>
+                    <Menu.Item as='a' >
+                    <Link to="/">Home</Link>
+                    </Menu.Item>
+                    {isAuthenticated ? (
+                    <Menu.Item>
+                      <Link to={`/profile/${state.userId}`}>Profile</Link>
+                    </Menu.Item>
+                      ) : null}
                     <Menu.Item position='right'>
                     { isAuthenticated ? (
                       <Button as='a' inverted style={{ marginLeft: '0.5em' }} onClick={logout}>
@@ -101,7 +142,7 @@ const MobileContainer = (props) =>  {
                   </Menu.Item>
                   
                   </Menu>
-                </Container>
+                
                 <HomepageHeading mobile />
               </Segment>
   

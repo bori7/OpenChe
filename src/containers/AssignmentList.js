@@ -22,8 +22,8 @@ const AssignmentList = () => {
           <Skeleton active />
         ) : (
           <div>
-            <h3 style={{ margin: "16px 0" }}>Assignment List</h3>
-            <List
+            <h3 style={{margin: "5px 0" }}>Assignment List</h3>
+            <List style={{minHeight: 500, }}
               size="large"
               bordered
               dataSource={assignments}

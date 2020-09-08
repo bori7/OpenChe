@@ -5,8 +5,8 @@ import { createMedia } from '@artsy/fresnel';
 import {Button, Container, Divider,
   Grid, Header, Image, List,
   Segment} from 'semantic-ui-react';
-import DesktopContainer from './HomePageContainer';
-
+// import DesktopContainer from './Header';
+import MobileContainer from './MobileContainer';
 
 const { MediaContextProvider, Media } = createMedia({
     breakpoints: {
@@ -22,8 +22,8 @@ const ResponsiveContainer = ({children}) => (
      * they will be rendered twice for SSR.
      */
     <MediaContextProvider>
-      <DesktopContainer>{children}</DesktopContainer>
-      {/* <MobileContainer>{children}</MobileContainer> */}
+      {/* <DesktopContainer>{children}</DesktopContainer> */}
+      <MobileContainer>{children}</MobileContainer>
     </MediaContextProvider>
   )
   
@@ -36,7 +36,7 @@ const HomepageLayout = (props) => {
     return(
       <ResponsiveContainer>
       <Segment style={{
-        height: '80%',
+        minHeight: 1000,
         fontWeight: 'normal',
         marginTop:  '2em',
         padding: '3em 0em' ,

@@ -21,14 +21,14 @@ const CustomLayout = (props) => {
     <Segment style={{ padding: '3em 0em' }} vertical>
     <Grid container stackable verticalAlign='middle'>
       <Grid.Row>
-        <Grid.Column width={8}>
+        <Grid.Column >
           <Header as='h3' style={{ fontSize: '2em' }}>
             We Help you Expand your mind and Intuition
           </Header>
-          <p style={{ fontSize: '1.33em' }}>
+          <p style={{ fontSize: '1.33em',fontVariant: 'small-caps', padding: '3em 0em' }}>
             We can give you superpowers to imagine and build processes that they never thought possible.
            </p>
-          <p style={{ fontSize: '1.33em' }}>
+          <p style={{ fontSize: '1.33em',fontVariant: 'small-caps', padding: '3em 0em'}}>
              Let us feed your wild imaginations and whet your passion... through pure chemical engineering.
           </p>
           {/* <Header as='h3' style={{ fontSize: '2em' }}>
