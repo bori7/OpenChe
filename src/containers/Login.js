@@ -1,7 +1,7 @@
 import React, { useContext} from "react";
 import {MyContext} from '../store/context/myContext';
 import { Form, Icon, Input, Button, Spin, message } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, withRouter } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 
 const FormItem = Form.Item;
@@ -11,19 +11,7 @@ const NormalLoginForm = (props) => {
 
   const {state, dispatch } = useContext(MyContext)
 
-  const handleSubmit = e => {
-    e.preventDefault();
-    props.form.validateFields((err, values) => {
-      if (!err) {
-        actions.authLogin(values.userName, values.password,dispatch)
-        //console.log(values.userName, values.password)
-        if (state.error != null){
-          props.history.push("/");
-        }
-       }
-    });
-  
-  };
+
   var errorMessage = null;
   React.useEffect(() => {
    
@@ -33,6 +21,18 @@ const NormalLoginForm = (props) => {
 
     const { getFieldDecorator } = props.form;
 
+    const handleSubmit = e => {
+      e.preventDefault();
+      props.form.validateFields((err, values) => {
+        if (!err) {
+          actions.authLogin(values.userName, values.password,dispatch)
+          //console.log(values.userName, values.password)
+         }
+      });
+      if (!state.error || state.token){
+        props.history.push("/");
+      }
+    };
    
    
     return (
@@ -96,4 +96,4 @@ const NormalLoginForm = (props) => {
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 
-export default WrappedNormalLoginForm;
+export default withRouter(WrappedNormalLoginForm);

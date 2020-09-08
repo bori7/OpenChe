@@ -1,7 +1,7 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Hoc from "./hoc/hoc";
-
+import CustomLayout from "./containers/Layout";
 import Login from "./containers/Login";
 import Signup from "./containers/Signup";
 import Profile from "./containers/Profile";
@@ -11,7 +11,9 @@ import AssignmentCreate from "./containers/AssignmentCreate";
 
 const BaseRouter = () => (
   <Hoc>
-    <Route exact path="/" component={AssignmentList} />
+    
+    <Route exact path="/" component={CustomLayout} />
+    <Route exact path="/assignment/" component={AssignmentList} />
     <Route exact path="/create/" component={AssignmentCreate} />
     <Route exact path="/login/" component={Login} />
     <Route exact path="/signup/" component={Signup} />
