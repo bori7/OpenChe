@@ -16,7 +16,7 @@ class AssignmentViewSet(viewsets.ModelViewSet):
 
     def create(self, request):
         serializer = AssignmentSerializer(data=request.data)
-        if serializer.is_valid(raise_exception=True):
+        if serializer.is_valid():
             assignment = serializer.create(request)
             if assignment:
                 return Response(status=HTTP_201_CREATED)
@@ -41,7 +41,7 @@ class GradedAssignmentCreateView(CreateAPIView):
     def post(self, request):
         # print(request.data)
         serializer = GradedAssignmentSerializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
+        serializer.is_valid()
         graded_assignment = serializer.create(request)
         if graded_assignment:
             return Response(status=HTTP_201_CREATED)
