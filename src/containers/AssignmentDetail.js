@@ -43,6 +43,7 @@ const AssignmentDetail = (props) => {
       answers: usersAnswers
     };
     createGradedASNT(token, asnt,dispatch)
+    props.history.push("/assignment");
     
   }
 

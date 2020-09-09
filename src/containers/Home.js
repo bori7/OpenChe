@@ -1,7 +1,9 @@
 
-import React from "react";
+import React,{useContext} from "react";
 import PropTypes from 'prop-types';
 import { createMedia } from '@artsy/fresnel';
+import {MyContext} from '../store/context/myContext';
+import { message } from "antd";
 import {Button, Container, Divider,
   Grid, Header, Image, List,
   Segment} from 'semantic-ui-react';
@@ -33,8 +35,22 @@ const ResponsiveContainer = ({children}) => (
   
 const HomepageLayout = (props) => {
 
+
+  const {state, dispatch } = useContext(MyContext)
+
+
+  var errorMessage = null;
+  React.useEffect(() => {
+   
+    if (state.error) { errorMessage = message.error(state.error)}
+    // console.log(state.error, errorMessage)
+  }, [state.error]);
+
+
     return(
+      
       <ResponsiveContainer>
+      {errorMessage}
       <Segment style={{
         minHeight: 1000,
         fontWeight: 'normal',

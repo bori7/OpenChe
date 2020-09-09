@@ -6,7 +6,7 @@ import { Link, withRouter } from "react-router-dom";
 import * as actions from "../store/actions/auth";
 import { createMedia } from '@artsy/fresnel';
 import PropTypes from 'prop-types';
-import {Button, Container, Icon,  Menu,
+import {Button,  Icon,  Menu,
   Segment, Sidebar} from 'semantic-ui-react';
 import {HomepageHeading} from './Header';
 

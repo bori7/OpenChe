@@ -2,13 +2,14 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { useContext, useState} from "react";
-import {MyContext} from '../store/context/myContext';
-import { Link, withRouter } from "react-router-dom";
-import * as actions from "../store/actions/auth";
-import { createMedia } from '@artsy/fresnel';
+// import {MyContext} from '../store/context/myContext';
+// import { Link, withRouter } from "react-router-dom";
+// import * as actions from "../store/actions/auth";
+// import { createMedia } from '@artsy/fresnel';
 import PropTypes from 'prop-types';
-import {Button, Container, Header, Icon, Menu,
-  Segment, Visibility } from 'semantic-ui-react';
+// import {Button, Container, Header, Icon, Menu,
+//   Segment, Visibility } from 'semantic-ui-react';
+import {Container, Header } from 'semantic-ui-react';
 
 
 // const { MediaContextProvider, Media } = createMedia({

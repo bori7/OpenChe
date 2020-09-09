@@ -30,6 +30,7 @@ const NormalLoginForm = (props) => {
          }
       });
       if (!state.error || state.token){
+        
         props.history.push("/");
       }
     };

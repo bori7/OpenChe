@@ -1,7 +1,7 @@
 import React, { useContext,useEffect } from "react";
 import {MyContext} from '../store/context/myContext';
 import { Link } from "react-router-dom";
-import { List, Skeleton } from "antd";
+import { List, Skeleton, message } from "antd";
 import * as actions from "../store/actions/assignments";
 import Hoc from "../hoc/hoc";
 
@@ -9,15 +9,22 @@ const AssignmentList = () => {
 
     const {state, dispatch} = useContext(MyContext)
     const {token, loading, assignments} = state
-    
+
+    var errorMessage = null;
+
     useEffect(() => {
       if (token !== undefined && token !== null) {
         actions.getASNTS(token,dispatch);
       }
-      }, [token]) 
+      if (state.error) { errorMessage = message.error(state.error)};
+    
+      if (state.message) { errorMessage = message.success(state.message)};
+  
+      }, [token, state.error, state.message]) 
       
     return (
       <Hoc>
+      {errorMessage}
         {loading ? (
           <Skeleton active />
         ) : (
