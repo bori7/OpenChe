@@ -18,12 +18,15 @@ const AssignmentDetail = (props) => {
   const {token, currentAssignment, loading, username} = state 
   const [usersAnswers, setUsersAnswers] = useState({})
 
+  var errorMessage = null;
 
   useEffect(() => {
     if (token !== undefined && token !== null) {
        getASNTSDetail(token, props.match.params.id,dispatch);
     }
-  }, [token])
+    if (state.error) { errorMessage = message.error(state.error)};
+    if (state.message) { errorMessage = message.success(state.message)};
+  }, [token, state.error, state.message]);
 
 
   const onChange = (e, qId) => {
@@ -40,6 +43,7 @@ const AssignmentDetail = (props) => {
       answers: usersAnswers
     };
     createGradedASNT(token, asnt,dispatch)
+    
   }
 
   
@@ -48,6 +52,7 @@ const AssignmentDetail = (props) => {
 
     return (
       <Hoc>
+      {errorMessage}
         {Object.keys(currentAssignment).length > 0 ? (
           <Hoc>
             {loading ? (

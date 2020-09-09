@@ -1,6 +1,7 @@
 import * as actionTypes from "../actions/actionTypes";
 import { updateObject } from "../utility";
 import React, { useReducer, createContext } from "react";
+import { message } from "antd";
 
 
 export const MyContext = createContext();
@@ -15,6 +16,7 @@ const initialState = {
   is_student: null,
   is_teacher: null,
   userId: null,
+  message: null,
 };
 
 const getGradedASNTListStart = (state, action) => {
@@ -39,6 +41,29 @@ const getGradedASNTListFail = (state, action) => {
   });
 };
 
+const createGradedASNTListStart = (state, action) => {
+  return updateObject(state, {
+    error: null,
+    loading: true,
+    message:null,
+  });
+};
+
+const createGradedASNTListSuccess = (state, action) => {
+  return updateObject(state, {
+    message: action.message,
+    loading: false
+  });
+};
+
+const createGradedASNTListFail = (state, action) => {
+  return updateObject(state, {
+    error: action.error,
+    message:null,
+    loading: false
+  });
+};
+
 
 
 const getASNTListStart = (state, action) => {
@@ -52,7 +77,8 @@ const getASNTListSuccess = (state, action) => {
   return updateObject(state, {
     assignments: action.assignments,
     error: null,
-    loading: false
+    loading: false,
+    message:null,
   });
 };
 
@@ -177,6 +203,12 @@ const reducer = (state, action) => {
       return getGradedASNTListSuccess(state, action);
     case actionTypes.GET_GRADED_ASSIGNMENTS_LIST_FAIL:
       return getGradedASNTListFail(state, action);  
+    case actionTypes.CREATE_GRADED_ASSIGNMENT_LIST_START:
+      return createGradedASNTListStart(state, action);
+    case actionTypes.CREATE_GRADED_ASSIGNMENTS_LIST_SUCCESS:
+      return createGradedASNTListSuccess(state, action);
+    case actionTypes.CREATE_GRADED_ASSIGNMENTS_LIST_FAIL:
+      return createGradedASNTListFail(state, action);    
     default:
       return state;
   }

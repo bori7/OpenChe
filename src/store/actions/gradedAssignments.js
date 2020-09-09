@@ -21,6 +21,26 @@ const getGradedASNTListFail = error => {
   };
 };
 
+const createGradedASNTListStart = () => {
+  return {
+    type: actionTypes.CREATE_GRADED_ASSIGNMENT_LIST_START,
+    
+  };
+};
+const createGradedASNTListSuccess = message => {
+  return {
+    type: actionTypes.CREATE_GRADED_ASSIGNMENTS_LIST_SUCCESS,
+    message:message,
+  };
+};
+
+const createGradedASNTListFail = error => {
+  return {
+    type: actionTypes.CREATE_GRADED_ASSIGNMENTS_LIST_FAIL,
+    error: error
+  };
+};
+
 export const getGradedASNTS = (username, token,dispatch) => {
  
     dispatch(getGradedASNTListStart());
@@ -40,10 +60,9 @@ export const getGradedASNTS = (username, token,dispatch) => {
       });
   };
 
-
 export const createGradedASNT = (token, asnt, dispatch) => {
   
-    //   dispatch(createASNTStart());
+      dispatch(createGradedASNTListStart());
     axios.defaults.headers = {
       "Content-Type": "application/json",
       Authorization: `Token ${token}`
@@ -51,10 +70,12 @@ export const createGradedASNT = (token, asnt, dispatch) => {
    axios
       .post(`/graded-assignments/create/`, asnt)
       .then(res => {
-        console.log("success",asnt);
-        //   dispatch(createASNTSuccess());
+        // console.log("success",asnt);
+        //console.log('now',res);
+          dispatch(createGradedASNTListSuccess('Submitted'));
       })
       .catch(err => {
-        //   dispatch(createASNTFail());
+        console.log('now',err);
+          dispatch(createGradedASNTListFail(err));
       });
 };
