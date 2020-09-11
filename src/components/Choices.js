@@ -7,7 +7,7 @@ const radioStyle = {
   display: "block",
   height: "30px",
   lineHeight: "30px",
-  paddingRight: '20px',
+ 
 };
 
 const Choices = (props) => { 
@@ -24,12 +24,11 @@ const Choices = (props) => {
         }
       >
         {props.choices.map((c, index) => {
-          return (<div 
-              >
-            <Radio width={0.80 *window.innerWidth}style={radioStyle} value={c} key={index}>
-              {c}
+          return (
+            <Radio  style={radioStyle} value={c} key={index}>
+              <span  style={{paddingRight: '30px',}} width={0.80 *window.innerWidth}>{c}</span>
             </Radio>
-            </div>
+           
           );
         })}
       </RadioGroup>
