@@ -46,22 +46,22 @@ const  Profile = () => {
             <br/>
             {/* <div> */}
             <ComposedChart
-              width={0.80 *window.innerWidth}
-              height={400}
+              width={0.900 *window.innerWidth}
+              height={200}
               data={data}
               
               margin={{
-                top: 20, right: 20, bottom: 20, left: 20,
+                top: 20, right: 30, bottom: 20,
               }}
             >
-              <CartesianGrid stroke="#f5f5f5" />
+              <CartesianGrid  strokeDasharray="3 4 5 2" />
               <XAxis dataKey="data" />
               <YAxis />
               <Tooltip />
               <Legend />
-              {/* <Area type="monotone" dataKey="grade" fill="#8884d8" stroke="#8884d8" /> */}
-              <Bar dataKey="grade" barSize={40} fill="#413ea0" />
-              <Line type="monotone" dataKey="grade" stroke="#ff7300" />
+              <Area type="monotone" dataKey="grade" fill="#8884d8" stroke="#8884d8" />
+              {/* <Bar dataKey="grade" barSize={40} fill="#413ea0" /> */}
+              <Line type="monotone" dataKey="grade" stroke="#ff7300" strokeDasharray="3 4 5 2"/>
               <Scatter dataKey="grade" fill="red" />
             </ComposedChart>
             {/* </div> */}

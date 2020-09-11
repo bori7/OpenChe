@@ -23,7 +23,7 @@ const RegistrationForm = (props) => {
         let is_teacher = false;
         values.userType === "student" &&  (is_student = true );
         values.userType === "teacher" &&  (is_teacher = true );
-        actions.authSignup(values.userName, values.email,values.password,
+        actions.authSignup(values.userName.toLowerCase(), values.email,values.password,
           values.confirm, is_student,is_teacher,dispatch)
           props.history.push("/");
       }

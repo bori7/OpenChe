@@ -36,7 +36,7 @@ const AssignmentList = () => {
               dataSource={assignments}
               renderItem={item => 
                                   <List.Item><div class="ui cards" >
-                                        <div class="card" style ={{minWidth:'400px'}}>
+                                        <div class="card" cc>
                                           <div class="content">
                                             <div class="description">
                                             {item.title}
