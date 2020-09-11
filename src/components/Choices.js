@@ -1,5 +1,5 @@
 import React from "react";
-import { Radio } from "antd";
+import { Divider, Radio } from "antd";
 
 const RadioGroup = Radio.Group;
 
@@ -23,10 +23,13 @@ const Choices = (props) => {
         }
       >
         {props.choices.map((c, index) => {
-          return (
+          return (<div style={{
+                paddingRight: '20px',
+              }}>
             <Radio style={radioStyle} value={c} key={index}>
               {c}
             </Radio>
+            </div>
           );
         })}
       </RadioGroup>

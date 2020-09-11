@@ -44,10 +44,12 @@ const  Profile = () => {
           <Hoc>
             <h1>Welcome  {username}</h1>
             <br/>
+            {/* <div> */}
             <ComposedChart
-              width={500}
+              width={0.80 *window.innerWidth}
               height={400}
               data={data}
+              
               margin={{
                 top: 20, right: 20, bottom: 20, left: 20,
               }}
@@ -62,6 +64,7 @@ const  Profile = () => {
               <Line type="monotone" dataKey="grade" stroke="#ff7300" />
               <Scatter dataKey="grade" fill="red" />
             </ComposedChart>
+            {/* </div> */}
             {/* <LineChart
               width={500}
               height={400}

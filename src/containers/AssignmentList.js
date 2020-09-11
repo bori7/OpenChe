@@ -34,10 +34,23 @@ const AssignmentList = () => {
               size="large"
               bordered
               dataSource={assignments}
-              renderItem={item => <Link to={`/assignments/${item.id}`}>
-                                  <List.Item>{item.title}</List.Item>
-                                   </Link>}
-            />
+              renderItem={item => 
+                                  <List.Item><div class="ui cards" >
+                                        <div class="card" style ={{minWidth:'400px'}}>
+                                          <div class="content">
+                                            <div class="description">
+                                            {item.title}
+                                            </div>
+                                          </div>
+                                          <div class="ui bottom attached button">
+                                          <Link to={`/assignments/${item.id}`}>
+                                            <i class="play icon"></i>
+                                            Take Test
+                                            </Link>
+                                          </div>
+                                        </div>
+                                      </div></List.Item>}
+                   />            
           </div>
         )}
       </Hoc>
@@ -46,3 +59,4 @@ const AssignmentList = () => {
 
 
 export default AssignmentList;
+

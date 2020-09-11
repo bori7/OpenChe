@@ -52,7 +52,7 @@ const MobileContainer = (props) =>  {
                 </Menu.Item>
               {isAuthenticated ? (
               <Menu.Item>
-                <Link to={`/profile/${state.userId}`}>Profile</Link>
+                <Link to={`/profile/${state.userId}`}>Dashboard</Link>
               </Menu.Item>
                 ) : null}
               {isAuthenticated && state.is_teacher ? (
