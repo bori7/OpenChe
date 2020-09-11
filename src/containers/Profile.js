@@ -25,7 +25,7 @@ const  Profile = () => {
    
 
   if(assignments.length >= 5){
-    var assig= assignments.slice(-5,)
+    var assig= assignments.slice(-5,).reverse()
   } else {
     var assig = assignments
   }
